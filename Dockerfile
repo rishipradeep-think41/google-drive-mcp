@@ -16,4 +16,4 @@ COPY . .
 # Expose port if needed (not required for MCP using stdio)
 
 # Command to run the application
-CMD ["npm","run","start"]
+CMD ["npm","start"]

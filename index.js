@@ -7,7 +7,7 @@ import { z } from "zod";
 
 dotenv.config({ path: join(process.cwd(), ".env") });
 
-function createMcpServer({ config }: any): any {
+function createMcpServer({ config }) {
   const CLIENT_ID = config?.CLIENT_ID || process.env.CLIET_ID;
   const CLIENT_SECRET = config?.CLIENT_SECRET || process.env.CLIENT_SECRET;
   const REFRESH_TOKEN = config?.REFRESH_TOKEN || process.env.REFRESH_TOKEN;
@@ -78,7 +78,7 @@ function createMcpServer({ config }: any): any {
       });
 
       const fileList = res.data.files
-        ?.map((file: any) => `${file.id} ${file.name} (${file.mimeType})`)
+        ?.map((file) => `${file.id} ${file.name} (${file.mimeType})`)
         .join("\n");
 
       let response = `Found ${res.data.files?.length ?? 0} files:\n${fileList}`;
@@ -115,7 +115,7 @@ function createMcpServer({ config }: any): any {
 
       // For Google Docs/Sheets/etc we need to export
       if (file.data.mimeType?.startsWith("application/vnd.google-apps")) {
-        let exportMimeType: string;
+        let exportMimeType;
         switch (file.data.mimeType) {
           case "application/vnd.google-apps.document":
             exportMimeType = "text/markdown";
@@ -142,9 +142,7 @@ function createMcpServer({ config }: any): any {
           content: [
             {
               type: "text",
-              text: `Contents of ${file.data.name || fileId}:\n\n${
-                res.data as string
-              }`,
+              text: `Contents of ${file.data.name || fileId}:\n\n${res.data}`,
             },
           ],
         };
@@ -158,7 +156,7 @@ function createMcpServer({ config }: any): any {
       const mimeType = file.data.mimeType || "application/octet-stream";
       const isText =
         mimeType.startsWith("text/") || mimeType === "application/json";
-      const content = Buffer.from(res.data as ArrayBuffer);
+      const content = Buffer.from(res.data);
 
       return {
         content: [
