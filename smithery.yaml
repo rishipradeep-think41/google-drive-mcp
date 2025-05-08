@@ -1,0 +1,25 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+startCommand:
+  type: http
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - CLIENT_ID
+      - CLIENT_SECRET
+      - REFRESH_TOKEN
+    properties:
+      CLIENT_ID:
+        type: string
+        description: "Google client id"
+      CLIENT_SECRET:
+        type: string
+        description: "Google client secret"
+      REFRESH_TOKEN:
+        type: string
+        description: "Google refresh token"
+  exampleConfig:
+    CLIENT_ID: google-client-id
+    CLIENT_SECRET: google-client-secret
+    REFRESH_TOKEN: google-refresh-token
